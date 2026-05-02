@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIGIL | Readiness Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-glow bg-cyan" id="ambient-bg"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-group">
+                <div class="logo-mark" id="logo-mark"></div>
+                <h1 class="logo-text">VIGIL</h1>
+            </div>
+            <div class="time-display" id="time-display">00:00</div>
+        </header>
+
+        <main class="dashboard-layout">
+            
+            <!-- PHASE 1: INPUTS -->
+            <section class="panel phase-panel active" id="phase-input">
+                <div class="panel-header text-center">
+                    <h2>Biometric Calibration</h2>
+                    <p>Input current physiological parameters.</p>
+                </div>
+
+                <div class="controls-grid">
+                    <!-- Sleep Control -->
+                    <div class="control-card">
+                        <div class="card-header">
+                            <span class="card-title">Sleep Duration (Last 24h)</span>
+                            <span class="card-value" id="val-sleep">7.0h</span>
+                        </div>
+                        <input type="range" id="in-sleep" class="premium-slider" min="0" max="12" step="0.5" value="7">
+                        <div class="slider-labels"><span>0h</span><span>12h</span></div>
+                    </div>
+
+                    <!-- Stress Control -->
+                    <div class="control-card">
+                        <div class="card-header">
+                            <span class="card-title">Stress Level</span>
+                            <span class="card-value" id="val-stress">Low</span>
+                        </div>
+                        <div class="segmented-control" id="in-stress">
+                            <button class="segment active" data-val="1">Low</button>
+                            <button class="segment" data-val="2">Mod</button>
+                            <button class="segment" data-val="3">High</button>
+                            <button class="segment" data-val="4">Crit</button>
+                        </div>
+                    </div>
+
+                    <!-- Emotion Control -->
+                    <div class="control-card">
+                        <div class="card-header">
+                            <span class="card-title">Emotional State</span>
+                            <span class="card-value" id="val-emotion">Calm</span>
+                        </div>
+                        <div class="segmented-control" id="in-emotion">
+                            <button class="segment active" data-val="1">Calm</button>
+                            <button class="segment" data-val="2">Anxious</button>
+                            <button class="segment" data-val="3">Angry</button>
+                            <button class="segment" data-val="4">Erratic</button>
+                        </div>
+                    </div>
+
+                    <!-- Medication Control -->
+                    <div class="control-card">
+                        <div class="card-header">
+                            <span class="card-title">Chemical Influence</span>
+                            <span class="card-value" id="val-meds">Clean</span>
+                        </div>
+                        <div class="chip-group" id="in-meds">
+                            <button class="chip active" data-val="none">None</button>
+                            <button class="chip" data-val="alcohol">Alcohol</button>
+                            <button class="chip" data-val="thc">THC</button>
+                            <button class="chip" data-val="sedative">Sedative</button>
+                            <button class="chip" data-val="stimulant">Stimulant</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-primary" id="btn-assess">ASSESS READINESS</button>
+                </div>
+            </section>
+
+            <!-- PHASE 2: RESULTS -->
+            <section class="panel phase-panel" id="phase-results">
+                
+                <!-- Main Gauge -->
+                <div class="readiness-display">
+                    <div class="main-gauge-container">
+                        <svg viewBox="0 0 200 200" class="main-svg">
+                            <defs>
+                                <linearGradient id="grad-safe" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00E5FF" />
+                                    <stop offset="100%" stop-color="#0077FF" />
+                                </linearGradient>
+                                <linearGradient id="grad-warn" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#FFB700" />
+                                    <stop offset="100%" stop-color="#FF7B00" />
+                                </linearGradient>
+                                <linearGradient id="grad-danger" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#FF003C" />
+                                    <stop offset="100%" stop-color="#990024" />
+                                </linearGradient>
+                            </defs>
+                            <path class="gauge-bg" d="M 40 160 A 85 85 0 1 1 160 160" fill="none" stroke-width="12" stroke-linecap="round"/>
+                            <path class="gauge-fill" id="gauge-readiness" d="M 40 160 A 85 85 0 1 1 160 160" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="400 400" stroke-dashoffset="400"/>
+                        </svg>
+                        <div class="gauge-content">
+                            <span class="readiness-label">READINESS</span>
+                            <span class="readiness-score" id="res-score">0</span>
+                            <span class="readiness-sub" id="res-status">ANALYZING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span class="m-label">Fatigue</span>
+                        <span class="m-value" id="res-fatigue">0.0</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="m-label">Impairment</span>
+                        <span class="m-value" id="res-impair">0.0</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="m-label">Emotional</span>
+                        <span class="m-value" id="res-emotion">0.0</span>
+                    </div>
+                </div>
+
+                <!-- Anomalies -->
+                <div class="anomalies-container" id="res-anomalies"></div>
+
+                <!-- Recommendation -->
+                <div class="recommendation-box" id="res-recommendation"></div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" id="btn-recalibrate">RECALIBRATE</button>
+                </div>
+
+                <!-- Legal Disclaimer -->
+                <p class="legal-disclaimer">
+                    ⚠ VIGIL is a supplementary wellness indicator, not a medical or legal clearance device. The ultimate responsibility for safe vehicle operation rests solely with the operator.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
