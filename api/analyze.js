@@ -1,19 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const path = require('path');
-
 const app = express();
-const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-
-// Serve static files from the current directory
-app.use(express.static(__dirname));
-
-// Serve index.html on root
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 // Secure API endpoint that proxies requests to Gemini
 app.post('/api/analyze', async (req, res) => {
@@ -24,7 +13,6 @@ app.post('/api/analyze', async (req, res) => {
         }
 
         const { state, computed } = req.body;
-
         const stressLabels = ['Low', 'Moderate', 'High', 'Critical'];
         const emotionLabels = ['Calm', 'Anxious', 'Agitated', 'Erratic'];
 
@@ -70,7 +58,6 @@ Be authoritative, clinical, and empathetic in tone. Do NOT use bullet points or 
         }
 
         const data = await response.json();
-        console.log('Gemini API Full Response:', JSON.stringify(data, null, 2));
         const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Unable to generate analysis.';
         
         res.json({ analysis: textResponse });
@@ -79,16 +66,6 @@ Be authoritative, clinical, and empathetic in tone. Do NOT use bullet points or 
         console.error('Error generating analysis:', error);
         res.status(500).json({ error: 'Internal server error during analysis generation.' });
     }
-});
-
-
-
-app.listen(PORT, () => {
-    console.log(`\n===========================================`);
-    console.log(`🚀 VIGIL Secure Backend Engine Started`);
-    console.log(`📡 Listening on http://localhost:${PORT}`);
-    console.log(`🔒 Gemini API Key loaded from .env: ${process.env.GEMINI_API_KEY ? 'YES' : 'NO'}`);
-    console.log(`===========================================\n`);
 });
 
 module.exports = app;
