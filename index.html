@@ -3,98 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIGIL | Readiness Assessment</title>
+    <title>VIGIL | AI-Powered Wellness Intelligence</title>
+    <meta name="description" content="VIGIL — Verify Impairment. Guard Innocent Lives. AI-powered driver readiness assessment using Gemini 2.5 Flash for personalized safety intelligence.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Ambient Background -->
+    <!-- OS Boot Sequence -->
+    <div id="boot-sequence" class="boot-overlay">
+        <div class="boot-text" id="boot-text"></div><span class="boot-cursor"></span>
+    </div>
+
+    <!-- Particle Canvas (ambient intelligence particles) -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Ambient Background Glow -->
     <div class="ambient-glow bg-cyan" id="ambient-bg"></div>
+    <div class="ambient-glow-secondary" id="ambient-bg-2"></div>
 
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
             <div class="logo-group">
-                <div class="logo-mark" id="logo-mark"></div>
-                <h1 class="logo-text">VIGIL</h1>
+                <div class="logo-mark" id="logo-mark">
+                    <div class="logo-pulse"></div>
+                </div>
+                <div class="logo-text-group">
+                    <h1 class="logo-text glitch-text" data-text="VIGIL">VIGIL</h1>
+                    <span class="logo-sub">WELLNESS INTELLIGENCE</span>
+                </div>
             </div>
-            <div class="time-display" id="time-display">00:00</div>
+            <div class="header-right">
+                <div class="ai-badge" id="ai-badge" title="Powered by Gemini 2.5 Flash">
+                    <span class="ai-sparkle">✦</span>
+                    <span>AI</span>
+                </div>
+                <div class="live-indicator" id="live-indicator">
+                    <span class="live-dot"></span>
+                    <span>LIVE</span>
+                </div>
+                <div class="time-display" id="time-display">00:00</div>
+                <div class="voice-indicator hidden" id="voice-indicator" title="V.I.G.I.L. Voice Active">
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                    <div class="voice-bar"></div>
+                </div>
+            </div>
         </header>
 
         <main class="dashboard-layout">
             
-            <!-- PHASE 1: INPUTS -->
+            <!-- Live Operator HUD -->
+            <div class="operator-hud" id="operator-hud" style="display:none;">
+                <div class="hud-header">
+                    <span class="hud-dot"></span>
+                    <span>OPTIC.LINK</span>
+                    <span class="hud-time" id="hud-time"></span>
+                </div>
+                <div class="hud-video-wrapper">
+                    <video id="operator-video" autoplay muted playsinline></video>
+                    <div class="hud-activate-overlay" id="hud-activate-overlay">
+                        <button class="btn-hud-activate" id="btn-hud-activate">ENABLE FEED</button>
+                    </div>
+                    <div class="hud-scanlines"></div>
+                    <div class="hud-crosshair">
+                        <div class="ch-tl"></div><div class="ch-tr"></div>
+                        <div class="ch-bl"></div><div class="ch-br"></div>
+                        <div class="ch-center"></div>
+                    </div>
+                </div>
+                <div class="hud-footer">
+                    <span class="hud-status" id="hud-status">STANDBY</span>
+                    <span class="hud-id">SYS_OP</span>
+                </div>
+            </div>
+
+            <!-- ═══════ PHASE 1: BIOMETRIC CALIBRATION ═══════ -->
             <section class="panel phase-panel active" id="phase-input">
+                
+                <!-- Real-time Biometric Ring (responds to inputs live) -->
+                <div class="bio-ring-container">
+                    <svg viewBox="0 0 240 240" class="bio-ring-svg" id="bio-ring">
+                        <defs>
+                            <linearGradient id="ring-grad-safe" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00E5FF" />
+                                <stop offset="50%" stop-color="#00FF88" />
+                                <stop offset="100%" stop-color="#0077FF" />
+                            </linearGradient>
+                            <linearGradient id="ring-grad-warn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFB700" />
+                                <stop offset="100%" stop-color="#FF7B00" />
+                            </linearGradient>
+                            <linearGradient id="ring-grad-danger" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FF003C" />
+                                <stop offset="100%" stop-color="#990024" />
+                            </linearGradient>
+                            <filter id="ring-glow">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Outer track -->
+                        <circle cx="120" cy="120" r="100" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="6"/>
+                        <!-- Live readiness arc -->
+                        <circle cx="120" cy="120" r="100" fill="none" stroke="url(#ring-grad-safe)" stroke-width="6" stroke-linecap="round"
+                                stroke-dasharray="628.3" stroke-dashoffset="0" id="bio-ring-fill"
+                                transform="rotate(-90 120 120)" filter="url(#ring-glow)"/>
+                        <!-- Inner decorative ring -->
+                        <circle cx="120" cy="120" r="88" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4 8"/>
+                    </svg>
+                    <div class="bio-ring-content">
+                        <span class="bio-ring-label">LIVE ESTIMATE</span>
+                        <span class="bio-ring-score" id="live-score">95</span>
+                        <span class="bio-ring-status" id="live-status">OPTIMAL</span>
+                    </div>
+                </div>
+
                 <div class="panel-header text-center">
                     <h2>Biometric Calibration</h2>
-                    <p>Input current physiological parameters.</p>
+                    <p>Adjust parameters. Readiness updates in real-time.</p>
                 </div>
 
                 <div class="controls-grid">
                     <!-- Sleep Control -->
-                    <div class="control-card">
+                    <div class="control-card" id="card-sleep">
                         <div class="card-header">
-                            <span class="card-title">Sleep Duration (Last 24h)</span>
+                            <div class="card-title-group">
+                                <span class="card-icon">🌙</span>
+                                <span class="card-title">Sleep Duration</span>
+                            </div>
                             <span class="card-value" id="val-sleep">7.0h</span>
                         </div>
-                        <input type="range" id="in-sleep" class="premium-slider" min="0" max="12" step="0.5" value="7">
-                        <div class="slider-labels"><span>0h</span><span>12h</span></div>
+                        <div class="slider-track-container">
+                            <div class="slider-fill" id="sleep-fill" style="width: 58.3%"></div>
+                            <input type="range" id="in-sleep" class="premium-slider" min="0" max="12" step="0.5" value="7">
+                        </div>
+                        <div class="slider-labels"><span>0h</span><span>6h</span><span>12h</span></div>
+                        <div class="card-micro-bar">
+                            <div class="micro-fill good" id="sleep-micro" style="width: 85%"></div>
+                        </div>
                     </div>
 
                     <!-- Stress Control -->
-                    <div class="control-card">
+                    <div class="control-card" id="card-stress">
                         <div class="card-header">
-                            <span class="card-title">Stress Level</span>
+                            <div class="card-title-group">
+                                <span class="card-icon">🧠</span>
+                                <span class="card-title">Cortisol Level</span>
+                            </div>
                             <span class="card-value" id="val-stress">Low</span>
                         </div>
                         <div class="segmented-control" id="in-stress">
+                            <div class="segment-highlight" id="stress-highlight"></div>
                             <button class="segment active" data-val="1">Low</button>
-                            <button class="segment" data-val="2">Mod</button>
+                            <button class="segment" data-val="2">Moderate</button>
                             <button class="segment" data-val="3">High</button>
-                            <button class="segment" data-val="4">Crit</button>
+                            <button class="segment" data-val="4">Critical</button>
                         </div>
                     </div>
 
                     <!-- Emotion Control -->
-                    <div class="control-card">
+                    <div class="control-card" id="card-emotion">
                         <div class="card-header">
-                            <span class="card-title">Emotional State</span>
+                            <div class="card-title-group">
+                                <span class="card-icon">💆</span>
+                                <span class="card-title">Psychological State</span>
+                            </div>
                             <span class="card-value" id="val-emotion">Calm</span>
                         </div>
                         <div class="segmented-control" id="in-emotion">
+                            <div class="segment-highlight" id="emotion-highlight"></div>
                             <button class="segment active" data-val="1">Calm</button>
                             <button class="segment" data-val="2">Anxious</button>
-                            <button class="segment" data-val="3">Angry</button>
+                            <button class="segment" data-val="3">Agitated</button>
                             <button class="segment" data-val="4">Erratic</button>
                         </div>
                     </div>
 
                     <!-- Medication Control -->
-                    <div class="control-card">
+                    <div class="control-card" id="card-meds">
                         <div class="card-header">
-                            <span class="card-title">Chemical Influence</span>
+                            <div class="card-title-group">
+                                <span class="card-icon">🧪</span>
+                                <span class="card-title">Chemical Influence</span>
+                            </div>
                             <span class="card-value" id="val-meds">Clean</span>
                         </div>
                         <div class="chip-group" id="in-meds">
-                            <button class="chip active" data-val="none">None</button>
-                            <button class="chip" data-val="alcohol">Alcohol</button>
-                            <button class="chip" data-val="thc">THC</button>
-                            <button class="chip" data-val="sedative">Sedative</button>
-                            <button class="chip" data-val="stimulant">Stimulant</button>
+                            <button class="chip active" data-val="none">
+                                <span class="chip-dot safe"></span>None
+                            </button>
+                            <button class="chip" data-val="alcohol">
+                                <span class="chip-dot danger"></span>Alcohol
+                            </button>
+                            <button class="chip" data-val="thc">
+                                <span class="chip-dot danger"></span>THC
+                            </button>
+                            <button class="chip" data-val="sedative">
+                                <span class="chip-dot danger"></span>Sedative
+                            </button>
+                            <button class="chip" data-val="stimulant">
+                                <span class="chip-dot warn"></span>Stimulant
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="action-footer">
-                    <button class="btn-primary" id="btn-assess">ASSESS READINESS</button>
+                    <button class="btn-primary" id="btn-assess">
+                        <span class="btn-text">INITIATE FULL ASSESSMENT</span>
+                        <span class="btn-icon">→</span>
+                    </button>
                 </div>
             </section>
 
-            <!-- PHASE 2: RESULTS -->
+            <!-- ═══════ SCANNING TRANSITION ═══════ -->
+            <section class="scan-overlay" id="scan-overlay">
+                <div class="scan-content">
+                    <div class="scan-ring">
+                        <svg viewBox="0 0 200 200" class="scan-svg">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,229,255,0.15)" stroke-width="2"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--accent-cyan)" stroke-width="3" 
+                                    stroke-dasharray="60 443" stroke-linecap="round" class="scan-spinner"/>
+                            <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(0,229,255,0.08)" stroke-width="1" stroke-dasharray="3 6"/>
+                        </svg>
+                        <div class="scan-text-container">
+                            <span class="scan-label" id="scan-label">INITIALIZING</span>
+                            <div class="scan-dots">
+                                <span class="scan-dot"></span>
+                                <span class="scan-dot"></span>
+                                <span class="scan-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scan-telemetry" id="scan-telemetry">
+                        <div class="telemetry-line" style="--delay: 0"><span class="t-key">SYS</span><span class="t-val" id="t-sys">CALIBRATING</span></div>
+                        <div class="telemetry-line" style="--delay: 1"><span class="t-key">FATIGUE_INDEX</span><span class="t-val" id="t-fat">--</span></div>
+                        <div class="telemetry-line" style="--delay: 2"><span class="t-key">CHEM_SCREEN</span><span class="t-val" id="t-chem">--</span></div>
+                        <div class="telemetry-line" style="--delay: 3"><span class="t-key">PSYCH_EVAL</span><span class="t-val" id="t-psych">--</span></div>
+                        <div class="telemetry-line" style="--delay: 4"><span class="t-key">COMPOSITE</span><span class="t-val" id="t-comp">--</span></div>
+                        <div class="telemetry-line" style="--delay: 5"><span class="t-key">GEMINI_AI</span><span class="t-val" id="t-ai">--</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════ PHASE 2: RESULTS DASHBOARD ═══════ -->
             <section class="panel phase-panel" id="phase-results">
                 
+                <!-- Primary Verdict -->
+                <div class="verdict-container" id="verdict-container">
+                    <div class="verdict-badge" id="verdict-badge">
+                        <span class="verdict-icon" id="verdict-icon">✓</span>
+                    </div>
+                    <div class="verdict-text-group">
+                        <span class="verdict-status" id="verdict-status">CLEARED</span>
+                        <span class="verdict-sub" id="verdict-sub">All systems nominal</span>
+                    </div>
+                    <div class="verdict-score-group">
+                        <span class="verdict-score" id="res-score">0</span>
+                        <span class="verdict-score-label">/ 100</span>
+                    </div>
+                </div>
+
                 <!-- Main Gauge -->
                 <div class="readiness-display">
                     <div class="main-gauge-container">
@@ -112,31 +288,56 @@
                                     <stop offset="0%" stop-color="#FF003C" />
                                     <stop offset="100%" stop-color="#990024" />
                                 </linearGradient>
+                                <filter id="gauge-glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
                             </defs>
-                            <path class="gauge-bg" d="M 40 160 A 85 85 0 1 1 160 160" fill="none" stroke-width="12" stroke-linecap="round"/>
-                            <path class="gauge-fill" id="gauge-readiness" d="M 40 160 A 85 85 0 1 1 160 160" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="400 400" stroke-dashoffset="400"/>
+                            <path class="gauge-bg" d="M 40 160 A 85 85 0 1 1 160 160" fill="none" stroke-width="10" stroke-linecap="round"/>
+                            <path class="gauge-fill" id="gauge-readiness" d="M 40 160 A 85 85 0 1 1 160 160" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="400 400" stroke-dashoffset="400" filter="url(#gauge-glow)"/>
                         </svg>
                         <div class="gauge-content">
-                            <span class="readiness-label">READINESS</span>
-                            <span class="readiness-score" id="res-score">0</span>
-                            <span class="readiness-sub" id="res-status">ANALYZING</span>
+                            <span class="readiness-label">READINESS INDEX</span>
+                            <span class="readiness-score" id="res-score-gauge">0</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sub Metrics -->
-                <div class="metrics-grid">
-                    <div class="metric-box">
-                        <span class="m-label">Fatigue</span>
-                        <span class="m-value" id="res-fatigue">0.0</span>
+                <!-- Factor Breakdown Bars -->
+                <div class="factor-breakdown">
+                    <h3 class="section-title">Factor Analysis</h3>
+                    <div class="factor-row">
+                        <div class="factor-label">
+                            <span class="factor-icon">🌙</span>
+                            <span>Fatigue Index</span>
+                        </div>
+                        <div class="factor-bar-track">
+                            <div class="factor-bar-fill" id="bar-fatigue" style="width: 0%"></div>
+                        </div>
+                        <span class="factor-value" id="res-fatigue">0.0</span>
                     </div>
-                    <div class="metric-box">
-                        <span class="m-label">Impairment</span>
-                        <span class="m-value" id="res-impair">0.0</span>
+                    <div class="factor-row">
+                        <div class="factor-label">
+                            <span class="factor-icon">🧪</span>
+                            <span>Impairment Level</span>
+                        </div>
+                        <div class="factor-bar-track">
+                            <div class="factor-bar-fill" id="bar-impair" style="width: 0%"></div>
+                        </div>
+                        <span class="factor-value" id="res-impair">0.0</span>
                     </div>
-                    <div class="metric-box">
-                        <span class="m-label">Emotional</span>
-                        <span class="m-value" id="res-emotion">0.0</span>
+                    <div class="factor-row">
+                        <div class="factor-label">
+                            <span class="factor-icon">🧠</span>
+                            <span>Emotional Load</span>
+                        </div>
+                        <div class="factor-bar-track">
+                            <div class="factor-bar-fill" id="bar-emotion" style="width: 0%"></div>
+                        </div>
+                        <span class="factor-value" id="res-emotion">0.0</span>
                     </div>
                 </div>
 
@@ -144,10 +345,45 @@
                 <div class="anomalies-container" id="res-anomalies"></div>
 
                 <!-- Recommendation -->
-                <div class="recommendation-box" id="res-recommendation"></div>
+                <div class="recommendation-box" id="res-recommendation">
+                    <div class="rec-header">
+                        <span class="rec-icon" id="rec-icon">ℹ</span>
+                        <span class="rec-title">System Recommendation</span>
+                    </div>
+                    <p class="rec-body" id="rec-body"></p>
+                </div>
+
+                <!-- AI Safety Briefing (Gemini 2.5 Flash) -->
+                <div class="ai-briefing-container" id="ai-briefing-container">
+                    <div class="ai-briefing-header">
+                        <div class="ai-briefing-title-group">
+                            <span class="ai-sparkle-icon">✦</span>
+                            <span class="ai-briefing-title">AI Safety Briefing</span>
+                        </div>
+                        <span class="ai-model-tag">Gemini 2.5 Flash</span>
+                    </div>
+                    <div class="ai-briefing-body" id="ai-briefing-body">
+                        <div class="ai-loading" id="ai-loading">
+                            <span class="ai-loading-dot"></span>
+                            <span class="ai-loading-dot"></span>
+                            <span class="ai-loading-dot"></span>
+                            <span class="ai-loading-text">Generating personalized analysis...</span>
+                        </div>
+                        <div class="ai-text" id="ai-text"></div>
+                    </div>
+                </div>
+
+                <!-- Heartbeat Monitor -->
+                <div class="heartbeat-container">
+                    <h3 class="section-title">Simulated Biometric Feed</h3>
+                    <canvas id="heartbeat-canvas" height="60"></canvas>
+                </div>
 
                 <div class="action-footer">
-                    <button class="btn-secondary" id="btn-recalibrate">RECALIBRATE</button>
+                    <button class="btn-secondary" id="btn-recalibrate">
+                        <span class="btn-icon-left">↺</span>
+                        RECALIBRATE
+                    </button>
                 </div>
 
                 <!-- Legal Disclaimer -->
@@ -158,7 +394,6 @@
 
         </main>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
