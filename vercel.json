@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "public": true,
   "rewrites": [
-    { "source": "/api/analyze", "destination": "/api/analyze.js" },
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/api/analyze", "destination": "/api/analyze.js" }
   ]
 }
