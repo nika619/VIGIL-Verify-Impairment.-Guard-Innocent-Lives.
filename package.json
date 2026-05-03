@@ -2,9 +2,7 @@
   "name": "gnec",
   "version": "1.0.0",
   "description": "> A pre-drive wellness intelligence system targeting **UN SDG 3.6** — halving global road traffic deaths by 2030.",
-  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
