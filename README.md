@@ -1,36 +1,82 @@
-# VIGIL
+# VIGIL — Wellness Intelligence HMI
 ### Verify Impairment. Guard Innocent Lives.
 
-> A pre-drive wellness intelligence system targeting **UN SDG 3.6** — halving global road traffic deaths by 2030.
+> A premium, high-fidelity pre-drive wellness intelligence system targeting **UN SDG 3.6** — halving global road traffic deaths by 2030.
 
 ---
 
-## The Problem
+## 🚀 NEW: The Intelligence Evolution
 
-**1.35 million people die in road crashes every year.** A massive contributing factor is *subjective impairment* — drivers self-assessing that they are "fine to drive" when suffering from severe sleep deficits, acute stress, compounding emotional states, or residual chemical influences. 
+VIGIL has evolved from a simple risk calculator into a clinical-grade AI Safety Briefing engine.
 
-Humans are notoriously bad at judging their own cognitive readiness. VIGIL exists to make that judgment objective and non-negotiable.
+### 👁️ Optic Link (Retinal Scan)
+A passive, real-time biometric HUD that establishes a secure "neural link" for operator monitoring. 
+- **Privacy-First:** The camera feed is entirely local and optional.
+- **High-Fidelity UI:** Features digital scanlines, contrasting filters, and a real-time crosshair tracking system for total immersion.
+
+### 🧠 Gemini 2.5 Flash Safety Briefing
+Integration with Google's most advanced multi-modal models to provide authoritative, evidence-based safety guidance.
+- **Biometric Synthesis:** Analyzes the complex interplay between sleep, stress, and chemical load.
+- **Clinical Prose:** Generates flowing, authoritative briefings that go beyond numbers to explain *how* your specific state compounds risk.
+
+### 🔊 Audio Feedback Engine
+- **Tactical Clicks:** Full Web Audio API synthesizer for tactile system feedback.
+- **Voice synthesis:** Real-time clinical safety briefings delivered via the Web Speech API.
+
+---
+
+## 📸 Dashboard Preview
+
+![VIGIL Dashboard Final](screenshot.png)
 
 ---
 
 ## The Solution
 
-VIGIL is a compound biometric risk engine wrapped in a premium, defense-grade Human-Machine Interface. By assessing sleep, stress, emotions, and chemical influences, it computes a definitive **Readiness Score (0–100)**. 
+VIGIL is a compound biometric risk engine wrapped in a premium, luxury-grade Human-Machine Interface. It replaces the dangerous "I feel fine" with a non-negotiable **Readiness Score (0–100)**, forcing the operator to confront their objective impairment level before turning the ignition.
 
-To elevate the experience, VIGIL integrates cutting-edge AI and native web APIs to create an immersive, cinematic "Impossible UI".
+### How It Works
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  PHASE 1: BIOMETRIC CALIBRATION                         │
+│                                                          │
+│  Operator inputs four compound risk factors:             │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐   │
+│  │  SLEEP   │ │  STRESS  │ │ EMOTION  │ │ CHEMICAL │   │
+│  │ Duration │ │  Level   │ │  State   │ │Influence │   │
+│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘   │
+│       └──────┬─────┴──────┬─────┴──────┬──────┘         │
+│              ▼            ▼            ▼                 │
+│       ┌──────────────────────────────────────┐           │
+│       │   COMPOUND RISK ENGINE (40/40/20)    │           │
+│       │   Fatigue×0.4 + Impair×0.4 + Emo×0.2│           │
+│       └──────────────────┬───────────────────┘           │
+│                          ▼                               │
+│  PHASE 2: AI SAFETY BRIEFING                             │
+│  ┌────────────────────────────────────────────────┐      │
+│  │         ╭─────────╮                            │      │
+│  │         │  SCORE  │  → Authoritative AI        │      │
+│  │         │   055   │     Safety Assessment      │      │
+│  │         ╰─────────╯                            │      │
+│  │  "VIGIL detects a critical combination..."     │      │
+│  │  ⚠ Anomaly Chips (if risk detected)            │      │
+│  └────────────────────────────────────────────────┘      │
+└──────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features & The "Impossible UI"
+## Key Features
 
 | Feature | Description |
 |---|---|
-| **Gemini 2.5 Flash Integration** | A secure Node.js backend streams risk data to Google's Gemini 2.5 Flash API to generate hyper-personalized, clinical safety briefings in real-time. |
-| **OPTIC.LINK (Retinal Scan HUD)** | An optional WebRTC-powered live camera feed that applies high-contrast cyan filters, scanlines, and rotating crosshairs to simulate a biometric retinal scan. |
-| **Audible AI Briefings** | Utilizes the native Web Speech API to read the Gemini safety assessment out loud, complete with a reactive UI waveform. |
-| **Tactile Audio Engine** | A custom Web Audio API synthesizer generates futuristic UI clicks, boot-up frequencies, and high-tech telemetry sounds. |
-| **Cinematic Boot Sequence** | A terminal-style initialization overlay greets the user, simulating a secure neural link boot-up. |
-| **Compound Risk Engine** | Algorithmically calculates impairment by understanding how sleep deficits multiply the risks of stress and chemical factors. |
+| **AI Intelligence** | Secured proxy to Gemini 2.5 Flash for authoritative safety briefings. |
+| **Optic Link HUD** | Live WebRTC-powered retinal scan interface with cinematic glitch filters. |
+| **Compound Risk Engine** | Understands how sleep deficit multiplies the effects of stress and chemical influences. |
+| **Anomaly Detection** | Dynamic warning chips slide in when specific thresholds are breached. |
+| **Adaptive Theming** | UI shifts from Cyan → Amber → Crimson based on real-time risk calculations. |
+| **Zero Dependencies** | 100% platform-native logic. No frameworks. No bloat. |
 
 ---
 
@@ -38,57 +84,45 @@ To elevate the experience, VIGIL integrates cutting-edge AI and native web APIs 
 
 | Layer | Technology |
 |---|---|
-| Frontend | Vanilla JS, HTML5, CSS3 (Glassmorphism, CSS Glitch FX, Parallax) |
-| Backend | Node.js, Express.js |
-| AI / LLM | Google Gemini 2.5 Flash API |
-| Native Web APIs | WebRTC (Camera), Web Audio API (Synth), Web Speech API (Voice) |
-| Security | `dotenv` for server-side API key management |
-
----
-
-## Screenshots
-
-*Note: Add updated screenshots of the Boot Sequence, the Optic Link HUD, and the AI Safety Briefing here.*
-
-![Dashboard Example](assets/screenshot-dashboard.png)
+| **Frontend** | HTML5, CSS3 (Glassmorphism, Animations), Vanilla JS |
+| **Backend** | Node.js, Express (Secure Proxy Architecture) |
+| **AI Engine** | Google Gemini 2.5 Flash API |
+| **Biometrics** | WebRTC (Video Feed), Web Audio API (Synthesizer), Web Speech API |
 
 ---
 
 ## How to Run Locally
 
-VIGIL now uses a secure backend to ensure your API keys are never exposed to the frontend.
-
-1. **Clone the repository:**
+1. **Clone & Install**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/vigil.git
-   cd vigil
-   ```
-
-2. **Install Dependencies:**
-   ```bash
+   git clone https://github.com/nika619/VIGIL.git
    npm install
    ```
 
-3. **Configure the Environment:**
-   Create a `.env` file in the root directory and add your Gemini API key:
+2. **Configure API Key**
+   Create a `.env` file in the root and add your Gemini API Key:
    ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_API_KEY=your_key_here
    ```
 
-4. **Start the Engine:**
+3. **Start the Engine**
    ```bash
    npm start
    ```
-   *The server will start on `http://localhost:8080`.*
+   Open `http://localhost:8080` to experience VIGIL.
 
 ---
 
-## UN SDG Alignment
-
-### SDG 3 — Good Health & Well-Being
-**Target 3.6:** *By 2030, halve the number of global deaths and injuries from road traffic accidents.*
-
+## UN SDG Alignment — SDG 3.6
 VIGIL directly targets the **human-error component** of road accidents by providing an objective, undeniable assessment of driver readiness — empowering operators to make safer decisions *before* the vehicle is in motion.
+
+---
+
+## Design Philosophy
+
+> *"Premium means frictionless. If the UI bothers the user, it has failed."*
+
+VIGIL is designed to feel like a native instrument panel in a luxury electric vehicle. The two-phase flow (Calibration → Assessment) ensures the operator is never overwhelmed, while the adaptive color theming and animated gauge provide immediate, intuitive feedback without requiring the user to read a single number.
 
 ---
 

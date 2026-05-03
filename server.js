@@ -85,3 +85,5 @@ app.listen(PORT, () => {
     console.log(`🔒 Gemini API Key loaded from .env: ${process.env.GEMINI_API_KEY ? 'YES' : 'NO'}`);
     console.log(`===========================================\n`);
 });
+
+module.exports = app;
